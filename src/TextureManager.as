@@ -18,9 +18,7 @@ package {
     }
     
     public function load(imageID_:String):void {
-      //Allocate a spot to identify if the texture is loaded
       textures[imageID_] = new Texture(imageID_);
-      //Add to the load queue to download the image file
       textureLoadQueue.push(textures[imageID_]);
     }
     
@@ -49,10 +47,12 @@ package {
       textureTemp.loaded = true;
       readyToLoadImage = true;
     }
+    
     public function errorLoading(eventObj:Object):void{
       trace("Error Loading Image: " + eventObj);
       readyToLoadImage = true;
     }
+    
     public function getTexture(ID_:String):Texture {
       return textures[ID_];
     }
