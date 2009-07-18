@@ -28,7 +28,7 @@ package
     
     public var done:Boolean = false;
     
-    public function Generate(terrain:Texture):void {
+    public function generate(terrain:Texture):void {
       if (done) {
         return;
       }
@@ -53,7 +53,7 @@ package
       done = true;
     }
     
-    public function GetBitmapDataAt(cx:uint, cy:uint, wx:uint, wy:uint):BitmapData {
+    public function getBitmapDataAt(cx:uint, cy:uint, wx:uint, wy:uint):BitmapData {
       var bd:BitmapData = new BitmapData(wx, wy);
       var rsx:uint, rsy:uint;
       rsx = Math.max((MAP_WIDTH - wx) / 2  + cx, 0);

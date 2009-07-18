@@ -27,9 +27,9 @@ package
     
     private function init(e:Event = null):void 
     {
-      stage.addEventListener(Event.ENTER_FRAME, EnterFrame);
+      stage.addEventListener(Event.ENTER_FRAME, enterFrame);
       
-      tm.Load("data/art/tiles/tepflr12");
+      tm.load("data/art/tiles/tepflr12");
       
       renderBuffer = new BitmapData(stage.stageWidth, stage.stageHeight, true, 0xFFFFFF);
       miniMap = new BitmapData(160, 120, true, 0xFFFFFF);
@@ -37,15 +37,15 @@ package
       stage.addChild(new Bitmap(miniMap));
     }
     
-    public function EnterFrame(event:Event):void {
-      tm.LoadQueue();
+    public function enterFrame(event:Event):void {
+      tm.loadQueue();
       
-      if (terrain.loaded && !map.done) {
-        map.Generate(tm.GetTexture("data/art/tiles/tepflr12"));
+      if (tm.getTexture("data/art/tiles/tepflr12").loaded && !map.done) {
+        map.generate(tm.getTexture("data/art/tiles/tepflr12"));
       }
       
       if (map.done) {
-        renderBuffer.draw(map.GetBitmapDataAt(0, 0, 800, 600));
+        renderBuffer.draw(map.getBitmapDataAt(0, 0, 800, 600));
         var m:Matrix = new Matrix();
         m.identity();
         m.scale(0.1, 0.1);
