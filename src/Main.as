@@ -42,11 +42,12 @@ package
     public function enterFrame(event:Event):void {
       tm.loadQueue();
       
-      if (map.done) {
-        map.moveScreen();
-        map.render();
-        map.renderMiniMap();
-      }
+      if (!map.done)
+        return;
+      
+      map.moveScreen();
+      map.render();
+      map.renderMiniMap();
       
       grid.render();
     }
