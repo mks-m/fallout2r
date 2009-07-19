@@ -59,8 +59,21 @@ package
         mat.translate(-TILE_OFFSET_X * (MAP_SIZE + 1), -TILE_OFFSET_Y * (MAP_SIZE - 1));
       }
       
+      done = true;
+    }
+  
+    public function render():void {
+      m.floor.bitmapData.copyPixels(bitmapData, position(), new Point(0, 0));
+    }
+    
+    public function renderMiniMap():void {
+      var mat:Matrix = new Matrix();
+      mat.identity();
+      mat.scale(0.1, 0.1);
+      m.miniMap.bitmapData.draw(bitmapData, mat); 
+      var pos:Rectangle = position();
       /*
-      for (i = 16; i < MAP_WIDTH; i += 16) {
+      for (i = pos.x / 10; i < MAP_WIDTH / 10; i += 16) {
         for (j = 0; j < MAP_HEIGHT; ++j) {
           bitmapData.setPixel(i, j, 0);
         }
@@ -72,19 +85,6 @@ package
         }
       }
       */
-      
-      done = true;
-    }
-  
-    public function render():void {
-      m.floor.bitmapData.copyPixels(bitmapData, position(), new Point(0, 0));
-    }
-    
-    public function renderMiniMap():void {
-      //var mat:Matrix = new Matrix();
-      //mat.identity();
-      //mat.scale(0.1, 0.1);
-      //m.miniMap.bitmapData.draw(bitmapData, mat); 
     }
     
     public function position():Rectangle {
