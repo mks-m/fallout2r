@@ -17,9 +17,9 @@ package {
       readyToLoadImage = true;
     }
     
-    public function load(imageID_:String):void {
-      textures[imageID_] = new Texture(imageID_);
-      textureLoadQueue.push(textures[imageID_]);
+    public function load(imageId:String, callback:Function = null):void {
+      textures[imageId] = new Texture(imageId, callback);
+      textureLoadQueue.push(textures[imageId]);
     }
     
     public function loadQueue():void {
@@ -45,6 +45,8 @@ package {
       var info:LoaderInfo = loader.contentLoaderInfo;
       textureTemp.bitmap = Bitmap(loader.content).bitmapData;  
       textureTemp.loaded = true;
+      if(textureTemp.callback != null)
+        textureTemp.callback.call();
       readyToLoadImage = true;
     }
     
