@@ -31,25 +31,21 @@ package
     {
       stage.addEventListener(Event.ENTER_FRAME, enterFrame);
       
-      floor = new Bitmap(new BitmapData(stage.stageWidth, stage.stageHeight, true, 0xFFFFFF));
-      miniMap = new Bitmap(new BitmapData(160, 120, true, 0xFFFFFF));
+      map = new Map(this, floor = new Bitmap(), miniMap = new Bitmap());
+      grid = new Grid(this);
+      center = new Point(0, 0);
       
       stage.addChild(floor);
       stage.addChild(miniMap);
-      
-      map = new Map(this);
-      grid = new Grid(this);
-      center = new Point(0, 0);
     }
     
     public function enterFrame(event:Event):void {
       tm.loadQueue();
       
       if (map.done) {
+        map.moveScreen();
         map.render();
         map.renderMiniMap();
-      } else {
-        map.generate();
       }
       
       grid.render();
